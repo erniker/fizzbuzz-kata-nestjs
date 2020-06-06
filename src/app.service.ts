@@ -3,14 +3,17 @@ import { FizzBuzz } from './FizzBuzz';
 
 @Injectable()
 export class AppService {
+  private fizzNumber = 3;
+  private buzzNumber = 5;
   constructor(private FizzBuzz: FizzBuzz) {}
-  generateFizzBuzzList(
-    numbers: number[],
-    fizzNumber: number,
-    buzzNumber: number,
-  ): (number | string)[] {
+
+  setFizzBuzzConfig(fizzNumber = 3, buzzNumber = 5) {
+    this.fizzNumber = fizzNumber;
+    this.buzzNumber = buzzNumber;
+  }
+  generateFizzBuzzList(numbers: number[]): (number | string)[] {
     return numbers.map(number =>
-      this.FizzBuzz.getFizzBuzz(number, fizzNumber, buzzNumber),
+      this.FizzBuzz.getFizzBuzz(number, this.fizzNumber, this.buzzNumber),
     );
   }
 }
